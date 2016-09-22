@@ -11,15 +11,6 @@ AdminConfig = {
 				{label: "E-mail", name: "email"},
 				{label: "Tipo de Pessoa", name: "tipoPessoa"}
 			],
-			routes: {
-				new: {
-					waitOn: function() {
-						console.log("Está tentando criar uma nova pessoa");
-						Router.go('unauthorized');
-						throw new Meteor.Error(401, "Não Autorizado");
-					}
-				}
-			}
 		},
 		Pesquisas: {
 			icon: "book",
@@ -32,3 +23,15 @@ AdminConfig = {
 		}
 	}
 }
+
+AutoForm.hooks({
+	admin_insert: {
+		onSuccess: function () {
+			if (this.template.data.collection === Pessoas) {
+        console.log('Pessoa adicionada');
+      } else if (this.template.data.collection === Pesquisas) {
+				console.log('pesquisa adicionada');
+			}
+		}
+	}
+});
