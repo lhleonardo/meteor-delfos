@@ -1,30 +1,5 @@
 Pesquisas = new Mongo.Collection("pesquisas");
 
-SchemasQuestionarios = new SimpleSchema({
-	"_id": {
-		type: String,
-		regEx: SimpleSchema.RegEx.Id,
-		autoValue: function () {
-			if (this.isInsert) {
-				return Random.id();
-			}
-		},
-		autoform: {
-			afFieldInput: {
-				type: "hidden",
-				labeled: false
-			}
-		}
-	},
-	nome: {
-    type: String,
-    optional: false
-  },
-  data: {
-    type: Date
-  }
-});
-
 SchemasPesquisas = new SimpleSchema({
 	nome: {
 		type: String,
@@ -86,12 +61,84 @@ SchemasPesquisas = new SimpleSchema({
       }
 		}
 	},
+	// criação dos questionários...
 	questionarios: {
-		type: [SchemasQuestionarios],
+		type: Array,
 		optional: true,
-		label: "Questionários"
+	},
+	"questionarios.$": {
+		type: Object
+	},
+	"questionarios.$.nome": {
+		type: String,
+		label: "Nome do questionário",
+		max: 200,
+		optional: false,
+	},
+	"questionarios.$.descricao": {
+		type: String,
+		label: "Descrição do questionário",
+		optional: true
+	},
+	"questionarios.$.dataVencimento": {
+		type: "datetime-local",
+		optional: true,
+		autoValue: function () {
+			if (this.isInsert &&
+				 !this.field("questionarios.$.dataVencimento").isSet) {
+					 return this.field("dataVencimento").value;
+				 }
+		}
+	},
+	"questionarios.$._id": {
+		type: String,
+		optional: true,
+		autoValue: function() {
+			if (this.isInsert) {
+				return Random.id();
+			}
+		},
+		autoform: {
+			afFieldInput: {
+	      type: "hidden"
+	    },
+			afFormGroup: {
+				label: false
+			}
+		}
+	},
+	"questionarios.$.perguntas": {
+		type: Array,
+		optional: false,
+	},
+	"questionarios.$.perguntas.$.tipo": {
+		type: String,
+		allowedValues: ['TEXTO', 'PARAGRAFO', 'MULTIPLA_ESCOLHA', 'INTERVALO'],
+		autoform: {
+			options: [
+				{label: "Texto curto", value: "TEXTO"},
+				{label: "Parágrafo"  , value: "PARAGRAFO"},
+				{label: "Multipla Escolha", value: "MULTIPLA_ESCOLHA"},
+				{label: "Intervalo de valores", value: "INTERVALO"}
+			]
+		}
+	},
+  "questionarios.$.perguntas.$.multiplaEscolha": {
+		type: Object
+	},
+	"questionarios.$.perguntas.$.multiplaEscolha.nome" {
+		type: String,
+		label: "Nome da pergunta",
+		optional: false
+	},
+	"questionarios.$.perguntas.$.multiplaEscolha.descricao": {
+		type: String,
+		label: "Descrição para a pergunta",
+		optional: true
+	},
+	"questionarios.$.perguntas.$.multiplaEscolha.itens": {
+		// continuar a implementaçao dos itens de questionário
 	}
-
 });
 
 Pesquisas.attachSchema(SchemasPesquisas);
