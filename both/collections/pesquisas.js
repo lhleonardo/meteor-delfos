@@ -1,5 +1,30 @@
 Pesquisas = new Mongo.Collection("pesquisas");
 
+SchemasQuestionarios = new SimpleSchema({
+	"_id": {
+		type: String,
+		regEx: SimpleSchema.RegEx.Id,
+		autoValue: function () {
+			if (this.isInsert) {
+				return Random.id();
+			}
+		},
+		autoform: {
+			afFieldInput: {
+				type: "hidden",
+				labeled: false
+			}
+		}
+	},
+	nome: {
+    type: String,
+    optional: false
+  },
+  data: {
+    type: Date
+  }
+});
+
 SchemasPesquisas = new SimpleSchema({
 	nome: {
 		type: String,
@@ -26,27 +51,47 @@ SchemasPesquisas = new SimpleSchema({
 		}
 	},
 	pesquisadores: {
-		type: Array,
-		optional: false,
-		minCount: 1,
-		label: "Pesquisadores responsáveis pela pesquisa"
-	},
-	"pesquisadores.$" : {
-		type: Object
-	},
-	"pesquisadores.$._id": {
-		type: String,
-		optional: false,
+		type: [String],
+		label: "Pesquisadores responsáveis pela pesquisa",
 		autoform: {
 			type: "select2",
-			options: function() {
-				let options = [];
-
-
-
-			}
+			afFieldInput: {
+        multiple: true
+      },
+			options: function () {
+				let valores = [];
+				let pessoas = Pessoas.find({tipoPessoa: "Pesquisador"});
+				pessoas.forEach((pessoa)=> {
+					valores.push({label: pessoa.nome, value: pessoa._id});
+				});
+				return valores;
+      }
 		}
+	},
+	especialistas: {
+		type: [String],
+		label: "Especialistas que participarão da pesquisa",
+		autoform: {
+			type: "select2",
+			afFieldInput: {
+        multiple: true
+      },
+			options: function () {
+				let valores = [];
+				let pessoas = Pessoas.find({});
+				pessoas.forEach((pessoa)=> {
+					valores.push({label: pessoa.nome, value: pessoa._id});
+				});
+				return valores;
+      }
+		}
+	},
+	questionarios: {
+		type: [SchemasQuestionarios],
+		optional: true,
+		label: "Questionários"
 	}
+
 });
 
 Pesquisas.attachSchema(SchemasPesquisas);

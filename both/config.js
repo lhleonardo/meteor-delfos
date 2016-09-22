@@ -4,6 +4,7 @@ AdminConfig = {
 	collections: {
 		Pessoas: {
 			icon: "smile-o",
+			label: "Pesquisadores/Especialistas",
 			color: "red",
 			tableColumns: [
 				{label: "Nome", name: "nome"},
@@ -23,15 +24,3 @@ AdminConfig = {
 		}
 	}
 }
-
-AutoForm.hooks({
-	admin_insert: {
-		onSuccess: function () {
-			if (this.template.data.collection === Pessoas) {
-        console.log('Pessoa adicionada');
-      } else if (this.template.data.collection === Pesquisas) {
-				console.log('pesquisa adicionada');
-			}
-		}
-	}
-});

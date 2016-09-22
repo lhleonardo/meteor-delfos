@@ -32,5 +32,6 @@ accounts-ui
 twbs:bootstrap
 yogiben:admin
 session
-aldeed:autoform-select2
 codechimp:autoform-masked-input
+aldeed:autoform-select2
+zimme:select2-bootstrap3-css
