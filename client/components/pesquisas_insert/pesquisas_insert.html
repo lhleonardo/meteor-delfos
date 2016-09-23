@@ -1,0 +1,33 @@
+<template name="InsertPesquisa">
+  {{#autoForm id="insertPesquisa" collection="Pesquisas" type="insert"}}
+    <fieldset>
+      <legend>Nova pesquisa</legend>
+
+
+
+      {{> afQuickField name="nome"}}
+      {{> afQuickField name="dataInicio"}}
+      {{> afQuickField name="dataVencimento"}}
+      {{> afQuickField name="descricao"}}
+      {{> afQuickField name="pesquisadores"}}
+      {{> afQuickField name="especialistas"}}
+
+      {{> afQuickField name="questionarios.$"}}
+
+
+
+      <!--{{> afQuickField name="questionarios"}}
+      {{> afQuickField name="questionarios._id"}}
+      {{> afQuickField name="questionarios.nome"}}
+      {{> afQuickField name="questionarios.descricao"}}
+      {{> afQuickField name="questionarios.dataVencimento"}}
+
+      {{> afQuickField name="questionarios.perguntas"}}
+      {{> afQuickField name="questionarios.perguntas.nome"}}-->
+
+
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+
+</template>
