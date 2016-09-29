@@ -141,6 +141,7 @@ QuestionarioSchema = new SimpleSchema({
 	}
 });
 
+
 SchemasPesquisas = new SimpleSchema({
 	nome: {
 		type: String,
