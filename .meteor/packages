@@ -24,6 +24,7 @@ less
 random
 aldeed:autoform
 aldeed:collection2
+aldeed:schema-deny
 dburles:collection-helpers
 accounts-base
 accounts-password
@@ -37,3 +38,4 @@ session
 codechimp:autoform-masked-input
 aldeed:autoform-select2
 zimme:select2-bootstrap3-css
+themeteorchef:bert

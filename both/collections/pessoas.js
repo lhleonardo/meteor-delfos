@@ -3,7 +3,7 @@ Pessoas = new Mongo.Collection("pessoas");
 SchemasPessoas = new SimpleSchema({
 	nome: {
 		type: String,
-		label: "Nome Completo",
+		label: "Nome Completo da pessoa",
 		max: 255,
 		optional: false
 	},
