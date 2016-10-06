@@ -14,11 +14,6 @@ AdminConfig = {
 			],
 		},
 		Pesquisas: {
-			// templates: {
-			// 	new: {
-			// 		name: 'InsertPesquisa'
-			// 	}
-			// },
 			icon: "book",
 			color: "green",
 			tableColumns: [

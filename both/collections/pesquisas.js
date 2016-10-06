@@ -25,11 +25,6 @@ PerguntasSchema = new SimpleSchema({
 	},
 	intervalo: {
 		type: Object,
-		autoform: {
-			afFieldInput: {
-				type: "hidden"
-			}
-		}
 	},
 	"intervalo.valorInicial": {
 		type: Number,
