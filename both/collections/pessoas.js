@@ -16,9 +16,22 @@ SchemasPessoas = new SimpleSchema({
 	cpf: {
 		type: String,
 		label: "CPF",
+		unique: true,
 		max: 14,
 		regEx: /^\d{3}.\d{3}.\d{3}-\d{2}$/,
 		optional: false,
+		custom: function (){
+			if (Meteor.isClient && (Meteor.isSet || Meteor.isUpdate)) {
+				Meteor.call("validaCpf", this.value, function(error, result){
+					if(error){
+						console.log("error", error);
+					}
+					if(!result){
+						 Pessoas.simpleSchema().namedContext("InsertPessoa").addInvalidKeys([{name: "cpf", type: "notUnique"}]);
+					}
+				});
+			}
+		},
 		autoform: {
 			type: 'masked-input',
       mask: '000.000.000-00',
@@ -26,7 +39,6 @@ SchemasPessoas = new SimpleSchema({
       	placeholder: '___.___.___-__'
       }
     }
-		//regex: // insert a regex here
 	},
 	rg: {
 		type: String,
@@ -36,6 +48,7 @@ SchemasPessoas = new SimpleSchema({
 	email: {
 		type: String,
 		regEx: SimpleSchema.RegEx.Email,
+		unique: true,
 		label: "E-mail para contato (Obrigatório)",
 		optional: false
 	},
@@ -48,7 +61,14 @@ SchemasPessoas = new SimpleSchema({
 		type: String,
 		optional: false,
 		label: "Tipo de Pessoa",
-		allowedValues: ['Pesquisador', 'Especialista']
+		allowedValues: ['Pesquisador', 'Especialista'],
+		autoform: {
+			firstOption: false,
+			options: [
+        {label: 'Pesquisador', value: 'Pesquisador'},
+				{label: 'Especialista', value: 'Especialista'}
+    ]
+		}
 	},
 	descricao: {
 		type: String,

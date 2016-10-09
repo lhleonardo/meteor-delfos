@@ -3,11 +3,6 @@ AdminConfig = {
 	skin: "purple-light",
 	collections: {
 		Pessoas: {
-			templates: {
-				new: {
-					name: 'InsertPessoa'
-				}
-			},
 			icon: "smile-o",
 			label: "Pesquisadores/Especialistas",
 			color: "red",

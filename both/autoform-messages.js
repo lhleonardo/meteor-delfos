@@ -29,5 +29,6 @@ SimpleSchema.messages({
     {exp: SimpleSchema.RegEx.Url, msg: "[label] precisa ser um link (URL) válido"},
     {exp: SimpleSchema.RegEx.Id, msg: "[label] precisa ser um analfanumérico de identificação válido"}
   ],
-  keyNotInSchema: "[key] não foi definida para o contexto do Schema"
+  keyNotInSchema: "[key] não foi definida para o contexto do Schema",
+  notUnique: "[label]=[value] já foi cadastrado e não pode haver duplicações"
 });
