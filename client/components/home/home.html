@@ -1,10 +1,5 @@
-<template name="home">
-	{{#if currentUser}}
-		{{> homeLogged}}
-	{{else}}	
-		{{> homePublic}}
-	{{/if}}
+<template name="Home">
+	<h1>Você está desconectado.</h1>
+	<h2>Autentique-se para continuar</h2>
+	{{> loginButtons}}
 </template>
-
-
-

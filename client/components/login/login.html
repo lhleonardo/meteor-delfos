@@ -1,0 +1,47 @@
+<template name="login">
+  <section style="margin-top: 3%">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2>Login</h2>
+                  <hr class="star-primary">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
+                  <form name="loginForm" id="loginForm">
+                      <div class="alert alert-warning alert-dismissible" hidden id="alerta-erro">
+                        <h4><i class="icon fa fa-warning"></i> Alerta!</h4>
+                        <span id="mensagem-alerta"></span>
+                      </div>
+                      <div class="row control-group">
+                          <div class="form-group col-xs-12 floating-label-form-group controls">
+                              <label>Email</label>
+                              <input type="email" class="form-control" placeholder="E-mail" id="email" name="email"
+                              required data-validation-required-message="Por favor, informe seu e-mail.">
+                              <p class="help-block text-danger"></p>
+                          </div>
+                      </div>
+
+                      <div class="row control-group">
+                          <div class="form-group col-xs-12 floating-label-form-group controls">
+                              <label>Senha</label>
+                              <input type="password" class="form-control" placeholder="Senha" name="senha"
+                                     id="senha" required data-validation-required-message="Por favor, informe sua senha.">
+                              <p class="help-block text-danger"></p>
+                          </div>
+                      </div>
+
+                      <br>
+                      <div id="success"></div>
+                      <div class="row">
+                          <div class="form-group col-xs-12">
+                              <button type="submit" class="btn btn-success btn-lg">Logar</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </section>
+</template>
